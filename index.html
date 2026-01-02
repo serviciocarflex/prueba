@@ -281,7 +281,7 @@ document.getElementById("formulario").addEventListener("submit", async function(
     boton.disabled = true;
     boton.innerText = "Enviando...";
 
-    const webhook = "https://uncollapsible-melodiously-chung.ngrok-free.dev/webhook-test/liquidaciones";
+    const webhook = "https://uncollapsible-melodiously-chung.ngrok-free.dev/webhook/liquidaciones";
 
     try {
         const res = await fetch(webhook, { method: "POST", body: data });
