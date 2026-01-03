@@ -54,7 +54,7 @@ body{
   border-bottom:1px solid rgba(15,23,42,.07);
 }
 
-/* ✅ CONTENEDOR LOGO + TEXTO (ESTE FALTABA) */
+/* ✅ CONTENEDOR LOGO + TEXTO */
 .head-brand{
   display:flex;
   align-items:center;
@@ -72,7 +72,7 @@ body{
 
 /* Texto a la derecha */
 .head-pill{
-  margin-left:auto;      /* ⬅️ ESTO LO EMPUJA A LA DERECHA */
+  margin-left:auto;      /* ⬅️ empuja a la derecha */
   display:inline-block;
   font-size:12px;
   padding:6px 10px;
@@ -188,6 +188,35 @@ button.primary{
   font-weight:700;
   cursor:pointer;
   min-width:240px;
+}
+
+/* ✅✅ AQUI VA LA PARTE PARA CELULAR (AGREGADA) ✅✅ */
+@media (max-width: 860px){
+  .grid-2{
+    grid-template-columns: 1fr;
+  }
+
+  .actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button.primary{
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Header en móvil: logo arriba y pill abajo */
+  .head-brand{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .head-pill{
+    margin-left: 0;
+    width: fit-content;
+  }
 }
 </style>
 </head>
