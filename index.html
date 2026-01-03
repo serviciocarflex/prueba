@@ -150,44 +150,26 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-/* Dropzone */
-.dropzone{
-  margin-top:10px;
-  border:1px solid rgba(15,23,42,.12);
-  border-radius:14px;
-  padding:12px;
-  background: #fff;
+/* ✅ Sección PDF estilo "original" (input file nativo) */
+.pdf-box{
+  margin-top:14px;
+  border-top:1px solid rgba(15,23,42,.08);
+  padding-top:14px;
 }
 
-.dz-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.dz-title{
-  font-size:14px;
+/* Cambiar texto del botón nativo a "Seleccionar PDF" (Chrome/Edge) */
+input[type="file"]::file-selector-button{
+  content:"Seleccionar PDF";
   font-weight:700;
-  margin:0;
-}
-.dz-sub{
-  font-size:12px;
-  color:var(--muted);
-  margin:4px 0 0;
-}
-
-.btn-lite{
+  padding:8px 14px;
+  border-radius:10px;
   border:1px solid rgba(15,23,42,.14);
   background:#fff;
-  border-radius:12px;
-  padding:10px 14px;
-  font-size:12px;
-  font-weight:700;
   cursor:pointer;
+  margin-right:10px;
 }
-.btn-lite:hover{
-  border-color: rgba(15,23,42,.25);
+input[type="file"]::file-selector-button:hover{
+  border-color: rgba(15,23,42,.35);
 }
 
 /* Actions */
@@ -312,16 +294,11 @@ button.primary:hover{ background:var(--primary-700); }
           </div>
         </div>
 
-        <div class="dropzone">
-          <div class="dz-row">
-            <div>
-              <p class="dz-title">Adjuntar liquidación (PDF)<span class="req">*</span></p>
-              <p class="dz-sub">Arrastra el archivo o selecciónalo (máx. 10 MB).</p>
-            </div>
-            <button type="button" class="btn-lite" id="pick">Seleccionar PDF</button>
-          </div>
-          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" hidden required>
-          <div class="help">El archivo quedará registrado en el sistema.</div>
+        <!-- ✅ PDF COMO EL ORIGINAL (INPUT NATIVO) -->
+        <div class="pdf-box">
+          <label>Adjuntar liquidación (PDF)<span class="req">*</span></label>
+          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required>
+          <div class="help">Formato permitido: PDF. El archivo quedará registrado en el sistema.</div>
         </div>
 
         <div class="actions">
@@ -338,8 +315,8 @@ button.primary:hover{ background:var(--primary-700); }
 document.getElementById("patente").addEventListener("input", e=>{
   e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
 });
-document.getElementById("pick").onclick = ()=> document.getElementById("archivo_pdf").click();
 </script>
 
 </body>
 </html>
+
