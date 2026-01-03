@@ -29,8 +29,6 @@ body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
-  /* ✅ OJO: en tu repo se ve "fondo formulario.jpg" (sin tilde).
-     Si tu archivo se llama "fondo formulario.jpg", cámbialo acá. */
   background:url("fondo formulario.jpg") center/cover no-repeat fixed;
 }
 
@@ -52,22 +50,16 @@ body{
   box-shadow:0 10px 25px rgba(2,6,23,.12);
 }
 
-/* ✅ Logo como imagen */
+/* ✅ Logo como imagen (sin texto extra) */
 .brand{
   display:flex;
-  flex-direction:column;
-  line-height:1.1;
-  min-width: 0;
+  align-items:center;
+  min-width:0;
 }
 .brand img{
-  height: 44px;      /* 🔥 Ajusta aquí el tamaño del logo */
+  height: 44px;   /* Ajusta tamaño aquí */
   width: auto;
   display:block;
-}
-.brand small{
-  margin-top: 4px;
-  font-size:12px;
-  color:var(--muted);
 }
 
 .pill{
@@ -180,7 +172,7 @@ input:focus, select:focus, textarea:focus{
   color:#dc2626;
   font-weight:700;
   cursor:pointer;
-  display:none; /* aparece solo si hay archivo */
+  display:none;
   white-space:nowrap;
 }
 
@@ -233,11 +225,7 @@ button.primary:disabled{ opacity:.7; cursor:not-allowed; }
   <div class="topbar">
     <!-- ✅ LOGO COMO IMAGEN -->
     <div class="brand">
-      <!-- en tu repo se llama "Logo carflex.jpg" (con espacio). OJO: GitHub Pages a veces falla con espacios.
-           ✅ Recomendación: renómbralo a "logo-carflex.jpg" para evitar problemas.
-           Mientras tanto, lo dejo tal cual: -->
       <img src="Logo carflex.jpg" alt="Carflex">
-      <small>Soluciones en movimiento</small>
     </div>
 
     <div class="pill">Carga de liquidación para emisión de OC</div>
@@ -429,3 +417,4 @@ document.getElementById("formulario").addEventListener("submit", async (e)=>{
 
 </body>
 </html>
+
