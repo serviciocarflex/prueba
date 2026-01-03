@@ -18,7 +18,7 @@
   --focus: rgba(255,114,37,.22);
 
   --radius: 14px;
-  --shadow: 0 12px 35px rgba(2,6,23,.08);
+  --shadow: 0 12px 35px rgba(2,6,23,.14);
 
   --h: 44px;
   --pad: 10px 12px;
@@ -26,13 +26,18 @@
 
 *{ box-sizing:border-box; }
 
+/* ✅ FONDO CON OVERLAY (PRO) */
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);
   color: var(--text);
+
+  background:
+    linear-gradient(180deg, rgba(2,6,23,.55), rgba(2,6,23,.55)),
+    url("fondo formulario.jpg") center/cover no-repeat fixed;
 }
 
+/* ====== LAYOUT FULL WIDTH ====== */
 .shell{
   max-width: 1240px;
   margin: 0 auto;
@@ -45,9 +50,12 @@ body{
   align-items:center;
   justify-content:space-between;
   padding: 14px 16px;
-  background:#fff;
-  border:1px solid rgba(15,23,42,.08);
+
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border:1px solid rgba(255,255,255,.35);
   border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(2,6,23,.18);
 }
 
 .logo{
@@ -57,7 +65,7 @@ body{
 .logo h1{
   margin:0;
   font-size:26px;
-  letter-spacing:0; /* 🔥 CARFLEX sin espacios */
+  letter-spacing:0; /* CARFLEX sin espacios */
 }
 .logo small{
   font-size:12px;
@@ -69,15 +77,18 @@ body{
   padding:8px 10px;
   border-radius:999px;
   border:1px solid rgba(15,23,42,.12);
-  background:#fff;
+  background: rgba(255,255,255,.95);
 }
 
 /* ===== MAIN ===== */
 .main{
   margin-top:14px;
-  background:var(--card);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(8px);
   border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.30);
+  overflow:hidden;
 }
 
 .head{
@@ -105,12 +116,13 @@ body{
 }
 .full{ grid-column:1/-1; }
 
-/* ===== LABELS (MEJORADOS) ===== */
+/* ===== LABELS ===== */
 label{
   font-size:14px;
   font-weight:700;
   margin-bottom:6px;
   display:block;
+  color:#0f172a;
 }
 
 .req{
@@ -125,6 +137,7 @@ input, select, textarea{
   border-radius:12px;
   font-size:14px;
   padding:var(--pad);
+  background:#fff;
 }
 input, select{ height:var(--h); }
 
@@ -145,19 +158,13 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-.error-text{
-  display:none;
-  font-size:12px;
-  color:#dc2626;
-  margin-top:6px;
-}
-
 /* ===== DROPZONE ===== */
 .dropzone{
   margin-top:10px;
   border:1px solid rgba(15,23,42,.12);
   border-radius:14px;
   padding:12px;
+  background: rgba(255,255,255,.95);
 }
 
 .dz-row{
@@ -170,11 +177,12 @@ input:focus, select:focus, textarea:focus{
 .dz-title{
   font-size:14px;
   font-weight:700;
+  margin:0;
 }
-
 .dz-sub{
   font-size:12px;
   color:var(--muted);
+  margin:4px 0 0;
 }
 
 .btn-lite{
@@ -186,24 +194,8 @@ input:focus, select:focus, textarea:focus{
   font-weight:700;
   cursor:pointer;
 }
-
-.file-pill{
-  display:none;
-  margin-top:10px;
-  border:1px solid rgba(15,23,42,.12);
-  border-radius:12px;
-  padding:10px;
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-}
-
-.file-remove{
-  border:none;
-  background:none;
-  color:#dc2626;
-  font-weight:700;
-  cursor:pointer;
+.btn-lite:hover{
+  border-color: rgba(15,23,42,.25);
 }
 
 /* ===== ACTIONS ===== */
@@ -213,6 +205,7 @@ input:focus, select:focus, textarea:focus{
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
+  gap: 10px;
 }
 
 .note{
@@ -229,18 +222,16 @@ button.primary{
   font-size:14px;
   font-weight:700;
   cursor:pointer;
+  min-width: 240px;
 }
-
-button.primary:hover{
-  background:var(--primary-700);
-}
+button.primary:hover{ background:var(--primary-700); }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:860px){
   .grid-2{ grid-template-columns:1fr; }
   .pill{ display:none; }
-  .actions{ flex-direction:column; gap:10px; }
-  button.primary{ width:100%; }
+  .actions{ flex-direction:column; align-items:stretch; }
+  button.primary{ width:100%; min-width: unset; }
 }
 </style>
 </head>
@@ -271,17 +262,17 @@ button.primary:hover{
         <div class="grid-2">
           <div>
             <label>Nombre del taller<span class="req">*</span></label>
-            <input name="nombre_taller" required>
+            <input name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required>
           </div>
 
           <div>
             <label>Correo electrónico del taller<span class="req">*</span></label>
-            <input type="email" name="correo_taller" required>
+            <input type="email" name="correo_taller" placeholder="Ej: contacto@taller.cl" required>
           </div>
 
           <div>
             <label>Patente (sin espacios ni guión)<span class="req">*</span></label>
-            <input id="patente" name="patente" maxlength="6" required>
+            <input id="patente" name="patente" maxlength="6" required placeholder="AB123C">
             <div class="help">Se formatea automáticamente.</div>
           </div>
 
@@ -320,12 +311,12 @@ button.primary:hover{
 
           <div class="full">
             <label>N° de Liquidación<span class="req">*</span></label>
-            <input name="numero_liquidacion" required>
+            <input name="numero_liquidacion" placeholder="Número interno de liquidación" required>
           </div>
 
           <div class="full">
             <label>Descripción del trabajo<span class="req">*</span></label>
-            <textarea name="descripcion_trabajo" required></textarea>
+            <textarea name="descripcion_trabajo" placeholder="Ej: Mantención 10.000 km, cambio de aceite y filtros. Observaciones..." required></textarea>
           </div>
         </div>
 
@@ -338,6 +329,7 @@ button.primary:hover{
             <button type="button" class="btn-lite" id="pick">Seleccionar PDF</button>
           </div>
           <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" hidden required>
+          <div class="help">El archivo quedará registrado en el sistema.</div>
         </div>
 
         <div class="actions">
