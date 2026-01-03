@@ -7,7 +7,6 @@
 
 <style>
 :root{
-  --bg: #f6f7fb;
   --card: #ffffff;
   --text: #0f172a;
   --muted:#64748b;
@@ -18,7 +17,7 @@
   --focus: rgba(255,114,37,.22);
 
   --radius: 14px;
-  --shadow: 0 12px 35px rgba(2,6,23,.14);
+  --shadow: 0 12px 35px rgba(2,6,23,.12);
 
   --h: 44px;
   --pad: 10px 12px;
@@ -26,36 +25,31 @@
 
 *{ box-sizing:border-box; }
 
-/* ✅ FONDO CON OVERLAY (PRO) */
+/* ✅ Fondo igual al original (sin overlay oscuro) */
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
-
-  background:
-    linear-gradient(180deg, rgba(2,6,23,.55), rgba(2,6,23,.55)),
-    url("fondo formulario.jpg") center/cover no-repeat fixed;
+  background: url("fondo formulario.jpg") center/cover no-repeat fixed;
 }
 
-/* ====== LAYOUT FULL WIDTH ====== */
 .shell{
   max-width: 1240px;
   margin: 0 auto;
   padding: 18px 16px 24px;
 }
 
-/* ===== HEADER ===== */
+/* Header */
 .topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding: 14px 16px;
 
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(6px);
-  border:1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.96);
+  border:1px solid rgba(15,23,42,.08);
   border-radius: var(--radius);
-  box-shadow: 0 10px 25px rgba(2,6,23,.18);
+  box-shadow: 0 10px 25px rgba(2,6,23,.12);
 }
 
 .logo{
@@ -77,17 +71,16 @@ body{
   padding:8px 10px;
   border-radius:999px;
   border:1px solid rgba(15,23,42,.12);
-  background: rgba(255,255,255,.95);
+  background: #fff;
 }
 
-/* ===== MAIN ===== */
+/* Main */
 .main{
   margin-top:14px;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,.96);
   border-radius:var(--radius);
   box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,.30);
+  border: 1px solid rgba(15,23,42,.08);
   overflow:hidden;
 }
 
@@ -116,7 +109,7 @@ body{
 }
 .full{ grid-column:1/-1; }
 
-/* ===== LABELS ===== */
+/* Labels */
 label{
   font-size:14px;
   font-weight:700;
@@ -124,13 +117,12 @@ label{
   display:block;
   color:#0f172a;
 }
-
 .req{
   color:var(--primary);
   margin-left:4px;
 }
 
-/* ===== INPUTS ===== */
+/* Inputs */
 input, select, textarea{
   width:100%;
   border:1px solid var(--border);
@@ -158,13 +150,13 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-/* ===== DROPZONE ===== */
+/* Dropzone */
 .dropzone{
   margin-top:10px;
   border:1px solid rgba(15,23,42,.12);
   border-radius:14px;
   padding:12px;
-  background: rgba(255,255,255,.95);
+  background: #fff;
 }
 
 .dz-row{
@@ -198,7 +190,7 @@ input:focus, select:focus, textarea:focus{
   border-color: rgba(15,23,42,.25);
 }
 
-/* ===== ACTIONS ===== */
+/* Actions */
 .actions{
   margin-top:16px;
   display:flex;
@@ -226,7 +218,7 @@ button.primary{
 }
 button.primary:hover{ background:var(--primary-700); }
 
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media(max-width:860px){
   .grid-2{ grid-template-columns:1fr; }
   .pill{ display:none; }
