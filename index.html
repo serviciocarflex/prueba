@@ -20,8 +20,8 @@
   --radius: 14px;
   --shadow: 0 12px 35px rgba(2,6,23,.08);
 
-  --h: 44px;           /* altura input */
-  --pad: 10px 12px;    /* padding input */
+  --h: 44px;
+  --pad: 10px 12px;
 }
 
 *{ box-sizing:border-box; }
@@ -29,294 +29,218 @@
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);   /* SIN IMAGEN */
+  background: var(--bg);
   color: var(--text);
 }
 
-/* ====== LAYOUT FULL WIDTH ====== */
 .shell{
-  max-width: 1240px;     /* usa pantalla de forma pro */
+  max-width: 1240px;
   margin: 0 auto;
   padding: 18px 16px 24px;
 }
 
-/* ====== HEADER TOP BAR ====== */
+/* ===== HEADER ===== */
 .topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap: 12px;
   padding: 14px 16px;
-  background: rgba(255,255,255,.9);
-  border: 1px solid rgba(15,23,42,.08);
+  background:#fff;
+  border:1px solid rgba(15,23,42,.08);
   border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(2,6,23,.05);
 }
 
-/* ✅ LOGO: lo dejo EXACTO como lo enviaste (no lo rompo) */
 .logo{
   display:flex;
   flex-direction:column;
-  line-height:1.05;
 }
 .logo h1{
   margin:0;
-  font-size: 26px;
-  letter-spacing: 3px;
+  font-size:26px;
+  letter-spacing:0; /* 🔥 CARFLEX sin espacios */
 }
 .logo small{
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 12px;
+  font-size:12px;
+  color:var(--muted);
 }
 
-/* Etiqueta a la derecha (opcional) */
 .pill{
-  font-size: 12px;
-  color:#334155;
-  padding: 8px 10px;
-  border: 1px solid rgba(15,23,42,.12);
-  border-radius: 999px;
-  background: #fff;
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.12);
+  background:#fff;
 }
 
-/* ====== MAIN AREA ====== */
+/* ===== MAIN ===== */
 .main{
-  margin-top: 14px;
-  background: var(--card);
-  border: 1px solid rgba(15,23,42,.08);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow:hidden;
+  margin-top:14px;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
 }
 
 .head{
-  padding: 16px 18px 10px;
-  border-bottom: 1px solid rgba(15,23,42,.07);
+  padding:16px 18px;
+  border-bottom:1px solid rgba(15,23,42,.07);
 }
 .head h2{
   margin:0 0 4px;
-  font-size: 20px;
-  letter-spacing: -0.2px;
+  font-size:20px;
 }
 .head p{
   margin:0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.35;
+  font-size:13px;
+  color:var(--muted);
 }
 
-/* ====== FORM ====== */
 .form{
-  padding: 14px 18px 18px;
+  padding:16px 18px 18px;
 }
 
-/* Diseño limpio sin “cuadrantes”:
-   - título sección pequeño
-   - separadores suaves
-*/
-.section-title{
-  margin: 12px 0 10px;
-  font-size: 12px;
-  color:#334155;
-  font-weight: 900;
-  letter-spacing: .35px;
-  text-transform: uppercase;
-}
-.hr{
-  height:1px;
-  background: rgba(15,23,42,.08);
-  margin: 12px 0;
-}
-
-/* Grid compacto para que haya menos scroll */
 .grid-2{
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 14px;
+  grid-template-columns:1fr 1fr;
+  gap:12px 16px;
 }
-.full{ grid-column: 1 / -1; }
+.full{ grid-column:1/-1; }
 
-/* Field */
+/* ===== LABELS (MEJORADOS) ===== */
 label{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:6px;
   display:block;
-  font-size: 12.5px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  color:#0f172a;
 }
-.req{ color: var(--primary); margin-left:4px; font-weight: 900; }
 
+.req{
+  color:var(--primary);
+  margin-left:4px;
+}
+
+/* ===== INPUTS ===== */
 input, select, textarea{
   width:100%;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fff;
-  font-size: 14px;
-  outline: none;
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:14px;
+  padding:var(--pad);
 }
-input, select{
-  height: var(--h);
-  padding: var(--pad);
-}
+input, select{ height:var(--h); }
+
 textarea{
-  padding: var(--pad);
-  min-height: 88px;  /* MÁS BAJO para que no “alargue” la página */
-  resize: vertical;
+  min-height:90px;
+  resize:vertical;
 }
 
 input:focus, select:focus, textarea:focus{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--focus);
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px var(--focus);
+  outline:none;
 }
 
-/* Helpers */
 .help{
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
 }
+
 .error-text{
   display:none;
-  margin-top: 6px;
-  font-size: 12px;
-  color: #dc2626;
+  font-size:12px;
+  color:#dc2626;
+  margin-top:6px;
 }
 
-/* ====== DROPZONE COMPACTO ====== */
+/* ===== DROPZONE ===== */
 .dropzone{
-  border: 1.5px dashed rgba(15,23,42,.18);
-  border-radius: 14px;
-  padding: 12px;
-  background: #fff;
-  transition: .15s ease;
+  margin-top:10px;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:14px;
+  padding:12px;
 }
-.dropzone.dragover{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--focus);
-}
+
 .dz-row{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap: 10px;
+  align-items:center;
+  gap:10px;
 }
-.dz-text{
-  min-width: 0;
-}
+
 .dz-title{
-  margin:0;
-  font-size: 13px;
-  font-weight: 900;
+  font-size:14px;
+  font-weight:700;
 }
+
 .dz-sub{
-  margin: 3px 0 0;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.3;
+  font-size:12px;
+  color:var(--muted);
 }
-.dz-actions{
-  display:flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
+
 .btn-lite{
-  border: 1px solid rgba(15,23,42,.14);
-  background: #fff;
-  color: #0f172a;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 12px;
-  font-weight: 900;
+  border:1px solid rgba(15,23,42,.14);
+  background:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:700;
   cursor:pointer;
 }
-.btn-lite:hover{ border-color: rgba(15,23,42,.25); }
 
 .file-pill{
   display:none;
-  margin-top: 10px;
-  border: 1px solid rgba(15,23,42,.12);
-  background: #fff;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 13px;
-  color: #334155;
+  margin-top:10px;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:12px;
+  padding:10px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap: 10px;
+  font-size:13px;
 }
-.file-pill span{ word-break: break-word; }
+
 .file-remove{
   border:none;
-  background: transparent;
-  color: #dc2626;
-  font-weight: 900;
+  background:none;
+  color:#dc2626;
+  font-weight:700;
   cursor:pointer;
 }
 
-/* ====== FOOT ACTIONS ====== */
+/* ===== ACTIONS ===== */
 .actions{
-  margin-top: 14px;
+  margin-top:16px;
   display:flex;
-  gap: 12px;
+  justify-content:space-between;
   align-items:center;
-  justify-content:flex-end;
-  flex-wrap: wrap;
+  flex-wrap:wrap;
+}
+
+.note{
+  font-size:12px;
+  color:var(--muted);
 }
 
 button.primary{
+  background:var(--primary);
+  color:#fff;
   border:none;
-  border-radius: 14px;
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 900;
-  cursor:pointer;
-  background: var(--primary);
-  color: #fff;
-  min-width: 240px;
-}
-button.primary:hover{ background: var(--primary-700); }
-button.primary:disabled{ opacity:.65; cursor:not-allowed; }
-
-.note{
-  margin-right:auto;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Success */
-.success{
-  display:none;
-  text-align:center;
-  padding: 40px 18px 28px;
-}
-.success h2{
-  margin: 0 0 8px;
-  color: #14532d;
-  font-size: 20px;
-}
-.success p{
-  margin: 0 0 18px;
-  color: var(--muted);
-}
-button.secondary{
-  border: 1px solid rgba(15,23,42,.14);
-  background: #fff;
-  color: #0f172a;
-  border-radius: 14px;
-  padding: 12px 14px;
-  font-weight: 900;
+  border-radius:14px;
+  padding:12px 20px;
+  font-size:14px;
+  font-weight:700;
   cursor:pointer;
 }
 
-/* Responsive */
-@media (max-width: 860px){
-  .grid-2{ grid-template-columns: 1fr; }
+button.primary:hover{
+  background:var(--primary-700);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .grid-2{ grid-template-columns:1fr; }
   .pill{ display:none; }
-  button.primary{ width:100%; min-width: unset; }
-  .actions{ justify-content:stretch; }
-  .note{ width:100%; margin-right:0; text-align:center; }
+  .actions{ flex-direction:column; gap:10px; }
+  button.primary{ width:100%; }
 }
 </style>
 </head>
@@ -326,25 +250,16 @@ button.secondary{
 <div class="shell">
 
   <div class="topbar">
-    <!-- ✅ LOGO EXACTO -->
     <div class="logo">
       <h1>
-        <span style="color:#033201;">C</span>
-        <span style="color:#033201;">A</span>
-        <span style="color:#033201;">R</span>
-        <span style="color:#820889;">F</span>
-        <span style="color:#0dc5aa;">L</span>
-        <span style="color:#ff7225;">E</span>
-        <span style="color:#ffae17;">X</span>
+        <span style="color:#033201;">C</span><span style="color:#033201;">A</span><span style="color:#033201;">R</span><span style="color:#820889;">F</span><span style="color:#0dc5aa;">L</span><span style="color:#ff7225;">E</span><span style="color:#ffae17;">X</span>
       </h1>
       <small>Soluciones en movimiento</small>
     </div>
-
     <div class="pill">Carga de liquidación para emisión de OC</div>
   </div>
 
   <div class="main">
-
     <div class="head">
       <h2>Portal de Liquidaciones</h2>
       <p>Registra la liquidación asociada a la unidad. Todos los campos son obligatorios.</p>
@@ -353,37 +268,26 @@ button.secondary{
     <div class="form">
       <form id="formulario" enctype="multipart/form-data">
 
-        <div class="section-title">Datos del taller</div>
-
         <div class="grid-2">
           <div>
-            <label for="nombre_taller">Nombre del taller<span class="req">*</span></label>
-            <input id="nombre_taller" type="text" name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required />
-            <div class="error-text" data-error-for="nombre_taller"></div>
+            <label>Nombre del taller<span class="req">*</span></label>
+            <input name="nombre_taller" required>
           </div>
 
           <div>
-            <label for="correo_taller">Correo electrónico del taller<span class="req">*</span></label>
-            <input id="correo_taller" type="email" name="correo_taller" placeholder="Ej: contacto@taller.cl" required />
-            <div class="error-text" data-error-for="correo_taller"></div>
-          </div>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="section-title">Unidad y trabajo</div>
-
-        <div class="grid-2">
-          <div>
-            <label for="patente">Patente (sin espacios ni guión)<span class="req">*</span></label>
-            <input id="patente" type="text" name="patente" required maxlength="6" pattern="[A-Za-z0-9]{6}" placeholder="AB123C" autocomplete="off" />
-            <div class="help">Se formatea automáticamente (mayúsculas, sin guiones).</div>
-            <div class="error-text" data-error-for="patente"></div>
+            <label>Correo electrónico del taller<span class="req">*</span></label>
+            <input type="email" name="correo_taller" required>
           </div>
 
           <div>
-            <label for="ciudad">Ciudad<span class="req">*</span></label>
-            <select id="ciudad" name="ciudad" required>
+            <label>Patente (sin espacios ni guión)<span class="req">*</span></label>
+            <input id="patente" name="patente" maxlength="6" required>
+            <div class="help">Se formatea automáticamente.</div>
+          </div>
+
+          <div>
+            <label>Ciudad<span class="req">*</span></label>
+            <select name="ciudad" required>
               <option value="">Seleccione</option>
               <option>Santiago</option>
               <option>Valparaíso</option>
@@ -394,12 +298,11 @@ button.secondary{
               <option>Temuco</option>
               <option>Puerto Montt</option>
             </select>
-            <div class="error-text" data-error-for="ciudad"></div>
           </div>
 
           <div>
-            <label for="tipo_trabajo">Tipo de trabajo<span class="req">*</span></label>
-            <select id="tipo_trabajo" name="tipo_trabajo" required>
+            <label>Tipo de trabajo<span class="req">*</span></label>
+            <select name="tipo_trabajo" required>
               <option value="">Seleccione</option>
               <option>Mantención</option>
               <option>Reparación Mecánica</option>
@@ -408,214 +311,50 @@ button.secondary{
               <option>Siniestro y DYP</option>
               <option>Otros</option>
             </select>
-            <div class="error-text" data-error-for="tipo_trabajo"></div>
           </div>
 
           <div>
-            <label for="fecha_entrega">Fecha de entrega de la unidad<span class="req">*</span></label>
-            <input id="fecha_entrega" type="date" name="fecha_entrega" required />
-            <div class="error-text" data-error-for="fecha_entrega"></div>
+            <label>Fecha de entrega de la unidad<span class="req">*</span></label>
+            <input type="date" name="fecha_entrega" required>
           </div>
 
           <div class="full">
-            <label for="numero_liquidacion">N° de Liquidación<span class="req">*</span></label>
-            <input id="numero_liquidacion" type="text" name="numero_liquidacion" placeholder="Número interno de liquidación" required />
-            <div class="error-text" data-error-for="numero_liquidacion"></div>
+            <label>N° de Liquidación<span class="req">*</span></label>
+            <input name="numero_liquidacion" required>
           </div>
 
           <div class="full">
-            <label for="descripcion_trabajo">Descripción del trabajo<span class="req">*</span></label>
-            <textarea id="descripcion_trabajo" name="descripcion_trabajo" rows="3" placeholder="Ej: Mantención 10.000 km, cambio de aceite y filtros. Observaciones..." required></textarea>
-            <div class="error-text" data-error-for="descripcion_trabajo"></div>
+            <label>Descripción del trabajo<span class="req">*</span></label>
+            <textarea name="descripcion_trabajo" required></textarea>
           </div>
         </div>
 
-        <div class="hr"></div>
-
-        <div class="section-title">Adjuntar liquidación</div>
-
-        <div class="dropzone" id="dropzone" role="group" aria-label="Adjuntar PDF">
+        <div class="dropzone">
           <div class="dz-row">
-            <div class="dz-text">
+            <div>
               <p class="dz-title">Adjuntar liquidación (PDF)<span class="req">*</span></p>
-              <p class="dz-sub">Arrastra y suelta el archivo aquí o usa “Buscar archivo”. (Máx. 10 MB)</p>
-              <div class="error-text" data-error-for="archivo_pdf"></div>
+              <p class="dz-sub">Arrastra el archivo o selecciónalo (máx. 10 MB).</p>
             </div>
-            <div class="dz-actions">
-              <button type="button" class="btn-lite" id="pick">Buscar archivo</button>
-            </div>
+            <button type="button" class="btn-lite" id="pick">Seleccionar PDF</button>
           </div>
-
-          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required hidden />
-
-          <div class="file-pill" id="filePill">
-            <span id="fileInfo"></span>
-            <button type="button" class="file-remove" id="removeFile">Quitar</button>
-          </div>
-
-          <div class="help">El archivo quedará registrado en el sistema.</div>
+          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" hidden required>
         </div>
 
         <div class="actions">
-          <div class="note">Soporte Carflex: si tienes problemas, responde el correo de solicitud.</div>
-          <button type="submit" class="primary" id="btnEnviar">Enviar liquidación</button>
+          <div class="note">Soporte Carflex: responde el correo de solicitud.</div>
+          <button type="submit" class="primary">Enviar liquidación</button>
         </div>
 
       </form>
-
-      <div id="mensaje" class="success">
-        <h2>✅ Liquidación registrada correctamente</h2>
-        <p>El comprobante fue enviado al correo del taller y la información quedó almacenada en el sistema.</p>
-        <button class="secondary" onclick="window.location.reload()">Enviar otra liquidación</button>
-      </div>
-
     </div>
   </div>
 </div>
 
 <script>
-function showError(fieldName, message){
-  const el = document.querySelector(`[data-error-for="${fieldName}"]`);
-  if(!el) return;
-  el.style.display = "block";
-  el.textContent = message;
-}
-function clearError(fieldName){
-  const el = document.querySelector(`[data-error-for="${fieldName}"]`);
-  if(!el) return;
-  el.style.display = "none";
-  el.textContent = "";
-}
-function clearAllErrors(){
-  document.querySelectorAll(".error-text").forEach(e => { e.style.display="none"; e.textContent=""; });
-}
-
-/* Patente formatting */
-const patente = document.getElementById("patente");
-patente.addEventListener("input", () => {
-  patente.value = patente.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  if (patente.value.length > 6) patente.value = patente.value.slice(0,6);
+document.getElementById("patente").addEventListener("input", e=>{
+  e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
 });
-
-/* Dropzone PDF */
-const dz = document.getElementById("dropzone");
-const fileInput = document.getElementById("archivo_pdf");
-const pick = document.getElementById("pick");
-const filePill = document.getElementById("filePill");
-const fileInfo = document.getElementById("fileInfo");
-const removeFile = document.getElementById("removeFile");
-const MAX_MB = 10;
-
-pick.addEventListener("click", () => fileInput.click());
-
-function setFile(f){
-  clearError("archivo_pdf");
-
-  if(!f) return;
-
-  if(f.type !== "application/pdf"){
-    showError("archivo_pdf", "Solo se permite PDF.");
-    fileInput.value = "";
-    filePill.style.display = "none";
-    return;
-  }
-
-  const sizeMB = f.size / (1024 * 1024);
-  if(sizeMB > MAX_MB){
-    showError("archivo_pdf", `El archivo supera ${MAX_MB} MB.`);
-    fileInput.value = "";
-    filePill.style.display = "none";
-    return;
-  }
-
-  filePill.style.display = "flex";
-  fileInfo.textContent = `${f.name} — ${sizeMB.toFixed(2)} MB`;
-}
-
-fileInput.addEventListener("change", e => setFile(e.target.files[0]));
-
-removeFile.addEventListener("click", () => {
-  fileInput.value = "";
-  filePill.style.display = "none";
-  clearError("archivo_pdf");
-});
-
-dz.addEventListener("dragover", e => {
-  e.preventDefault();
-  dz.classList.add("dragover");
-});
-dz.addEventListener("dragleave", () => dz.classList.remove("dragover"));
-dz.addEventListener("drop", e => {
-  e.preventDefault();
-  dz.classList.remove("dragover");
-  const f = e.dataTransfer.files[0];
-  if(!f) return;
-
-  const dt = new DataTransfer();
-  dt.items.add(f);
-  fileInput.files = dt.files;
-
-  setFile(f);
-});
-
-/* Submit */
-document.getElementById("formulario").addEventListener("submit", async function(e){
-  e.preventDefault();
-  clearAllErrors();
-
-  const form = document.getElementById("formulario");
-  const boton = document.getElementById("btnEnviar");
-  const mensaje = document.getElementById("mensaje");
-
-  const requiredIds = [
-    "nombre_taller","correo_taller","patente","ciudad",
-    "tipo_trabajo","fecha_entrega","numero_liquidacion","descripcion_trabajo"
-  ];
-
-  let ok = true;
-  requiredIds.forEach(id => {
-    const el = document.getElementById(id);
-    if(!el.value){
-      ok = false;
-      showError(id, "Este campo es obligatorio.");
-    }
-  });
-
-  if(patente.value && patente.value.length !== 6){
-    ok = false;
-    showError("patente", "La patente debe tener 6 caracteres (ej: AB123C).");
-  }
-
-  if(!fileInput.files || !fileInput.files[0]){
-    ok = false;
-    showError("archivo_pdf", "Adjunta el PDF para continuar.");
-  }
-
-  if(!ok) return;
-
-  const data = new FormData(form);
-
-  boton.disabled = true;
-  boton.textContent = "Enviando...";
-
-  const webhook = "https://uncollapsible-melodiously-chung.ngrok-free.dev/webhook/liquidaciones";
-
-  try{
-    const res = await fetch(webhook, { method:"POST", body:data });
-    if(res.ok){
-      form.style.display = "none";
-      mensaje.style.display = "block";
-    } else {
-      alert("❌ Error al enviar la liquidación");
-      boton.disabled = false;
-      boton.textContent = "Enviar liquidación";
-    }
-  }catch{
-    alert("❌ Error de conexión");
-    boton.disabled = false;
-    boton.textContent = "Enviar liquidación";
-  }
-});
+document.getElementById("pick").onclick = ()=> document.getElementById("archivo_pdf").click();
 </script>
 
 </body>
