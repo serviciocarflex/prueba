@@ -25,7 +25,7 @@
 
 *{ box-sizing:border-box; }
 
-/* ✅ Fondo igual al original (sin overlay oscuro) */
+/* ✅ Fondo igual al original */
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -59,7 +59,7 @@ body{
 .logo h1{
   margin:0;
   font-size:26px;
-  letter-spacing:0; /* CARFLEX sin espacios */
+  letter-spacing:0;
 }
 .logo small{
   font-size:12px;
@@ -150,16 +150,27 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-/* ✅ Sección PDF estilo "original" (input file nativo) */
+/* ✅ PDF mejorado (mismo formato original pero bien alineado + quitar + validación visual) */
 .pdf-box{
   margin-top:14px;
   border-top:1px solid rgba(15,23,42,.08);
   padding-top:14px;
 }
 
-/* Cambiar texto del botón nativo a "Seleccionar PDF" (Chrome/Edge) */
+.file-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.file-row input[type="file"]{
+  flex: 1 1 520px;
+  min-width: 260px;
+}
+
+/* Botón nativo */
 input[type="file"]::file-selector-button{
-  content:"Seleccionar PDF";
   font-weight:700;
   padding:8px 14px;
   border-radius:10px;
@@ -170,6 +181,52 @@ input[type="file"]::file-selector-button{
 }
 input[type="file"]::file-selector-button:hover{
   border-color: rgba(15,23,42,.35);
+}
+
+/* Texto “Seleccionar PDF” (Chrome/Edge moderno; puede variar por navegador/idioma) */
+input[type="file"]::file-selector-button{
+  content:"Seleccionar PDF";
+}
+
+/* Botón quitar */
+.btn-remove{
+  border:1px solid rgba(15,23,42,.14);
+  background:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.btn-remove:hover{ border-color: rgba(15,23,42,.35); }
+
+/* Info archivo */
+.file-info{
+  display:none;
+  margin-top:10px;
+  border:1px solid rgba(15,23,42,.12);
+  background:#fff;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:13px;
+  color:#334155;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.file-info span{
+  word-break: break-word;
+}
+
+/* Error PDF */
+.file-error{
+  display:none;
+  margin-top:8px;
+  font-size:12px;
+  color:#dc2626;
+  font-weight:600;
 }
 
 /* Actions */
@@ -206,6 +263,14 @@ button.primary:hover{ background:var(--primary-700); }
   .pill{ display:none; }
   .actions{ flex-direction:column; align-items:stretch; }
   button.primary{ width:100%; min-width: unset; }
+
+  .file-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .file-row input[type="file"]{
+    min-width: 100%;
+  }
 }
 </style>
 </head>
@@ -294,11 +359,23 @@ button.primary:hover{ background:var(--primary-700); }
           </div>
         </div>
 
-        <!-- ✅ PDF COMO EL ORIGINAL (INPUT NATIVO) -->
+        <!-- ✅ PDF: calza bien + valida PDF + muestra nombre + botón quitar -->
         <div class="pdf-box">
           <label>Adjuntar liquidación (PDF)<span class="req">*</span></label>
-          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required>
-          <div class="help">Formato permitido: PDF. El archivo quedará registrado en el sistema.</div>
+
+          <div class="file-row">
+            <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required>
+            <button type="button" class="btn-remove" id="quitar_pdf">Quitar</button>
+          </div>
+
+          <div class="file-error" id="pdf_error"></div>
+
+          <div class="file-info" id="file_info" style="display:none;">
+            <span id="file_name"></span>
+            <button type="button" class="btn-remove" id="quitar_pdf2">Quitar</button>
+          </div>
+
+          <div class="help">Formato permitido: PDF (máx. 10 MB). El archivo quedará registrado en el sistema.</div>
         </div>
 
         <div class="actions">
@@ -312,11 +389,71 @@ button.primary:hover{ background:var(--primary-700); }
 </div>
 
 <script>
+/* Patente */
 document.getElementById("patente").addEventListener("input", e=>{
   e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
 });
+
+/* PDF: validar + mostrar nombre + quitar */
+const pdfInput = document.getElementById("archivo_pdf");
+const btnQuitar = document.getElementById("quitar_pdf");
+const btnQuitar2 = document.getElementById("quitar_pdf2");
+const pdfError = document.getElementById("pdf_error");
+const fileInfo = document.getElementById("file_info");
+const fileName = document.getElementById("file_name");
+const MAX_MB = 10;
+
+function showPdfError(msg){
+  pdfError.style.display = "block";
+  pdfError.textContent = msg;
+}
+function clearPdfError(){
+  pdfError.style.display = "none";
+  pdfError.textContent = "";
+}
+function clearPdf(){
+  pdfInput.value = "";
+  clearPdfError();
+  fileInfo.style.display = "none";
+  fileName.textContent = "";
+}
+
+function setInfo(f){
+  const sizeMB = (f.size / (1024*1024)).toFixed(2);
+  fileName.textContent = `Archivo seleccionado: ${f.name} — ${sizeMB} MB`;
+  fileInfo.style.display = "flex";
+}
+
+pdfInput.addEventListener("change", () => {
+  clearPdfError();
+  fileInfo.style.display = "none";
+  fileName.textContent = "";
+
+  const f = pdfInput.files && pdfInput.files[0];
+  if(!f) return;
+
+  // Validar PDF
+  const isPdf = (f.type === "application/pdf") || f.name.toLowerCase().endsWith(".pdf");
+  if(!isPdf){
+    clearPdf();
+    showPdfError("Solo se permite PDF. Selecciona un archivo .pdf");
+    return;
+  }
+
+  // Validar tamaño
+  const sizeMB = f.size / (1024*1024);
+  if(sizeMB > MAX_MB){
+    clearPdf();
+    showPdfError(`El PDF supera ${MAX_MB} MB. Usa un archivo más liviano.`);
+    return;
+  }
+
+  setInfo(f);
+});
+
+btnQuitar.addEventListener("click", clearPdf);
+btnQuitar2.addEventListener("click", clearPdf);
 </script>
 
 </body>
 </html>
-
