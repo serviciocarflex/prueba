@@ -29,6 +29,8 @@ body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
+  /* ✅ OJO: en tu repo se ve "fondo formulario.jpg" (sin tilde).
+     Si tu archivo se llama "fondo formulario.jpg", cámbialo acá. */
   background:url("fondo formulario.jpg") center/cover no-repeat fixed;
 }
 
@@ -42,6 +44,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap: 14px;
   padding:14px 16px;
   background:rgba(255,255,255,.96);
   border:1px solid rgba(15,23,42,.08);
@@ -49,9 +52,23 @@ body{
   box-shadow:0 10px 25px rgba(2,6,23,.12);
 }
 
-.logo{ display:flex; flex-direction:column; }
-.logo h1{ margin:0; font-size:26px; letter-spacing:0; }
-.logo small{ font-size:12px; color:var(--muted); }
+/* ✅ Logo como imagen */
+.brand{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+  min-width: 0;
+}
+.brand img{
+  height: 44px;      /* 🔥 Ajusta aquí el tamaño del logo */
+  width: auto;
+  display:block;
+}
+.brand small{
+  margin-top: 4px;
+  font-size:12px;
+  color:var(--muted);
+}
 
 .pill{
   font-size:12px;
@@ -59,6 +76,7 @@ body{
   border-radius:999px;
   border:1px solid rgba(15,23,42,.12);
   background:#fff;
+  white-space: nowrap;
 }
 
 .main{
@@ -213,14 +231,15 @@ button.primary:disabled{ opacity:.7; cursor:not-allowed; }
 <div class="shell">
 
   <div class="topbar">
-    <div class="logo">
-      <h1>
-        <span style="color:#033201;">C</span><span style="color:#033201;">A</span><span style="color:#033201;">R</span>
-        <span style="color:#820889;">F</span><span style="color:#0dc5aa;">L</span>
-        <span style="color:#ff7225;">E</span><span style="color:#ffae17;">X</span>
-      </h1>
+    <!-- ✅ LOGO COMO IMAGEN -->
+    <div class="brand">
+      <!-- en tu repo se llama "Logo carflex.jpg" (con espacio). OJO: GitHub Pages a veces falla con espacios.
+           ✅ Recomendación: renómbralo a "logo-carflex.jpg" para evitar problemas.
+           Mientras tanto, lo dejo tal cual: -->
+      <img src="Logo carflex.jpg" alt="Carflex">
       <small>Soluciones en movimiento</small>
     </div>
+
     <div class="pill">Carga de liquidación para emisión de OC</div>
   </div>
 
@@ -357,14 +376,12 @@ function handleFile(file){
     return;
   }
 
-  // Validar PDF
   if(file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")){
     clearPdf();
     setPdfError("❌ Solo se permite archivo PDF.");
     return;
   }
 
-  // Validar tamaño
   const sizeMB = file.size / (1024 * 1024);
   if(sizeMB > MAX_MB){
     clearPdf();
@@ -384,7 +401,6 @@ fileInput.addEventListener("change", ()=> handleFile(fileInput.files[0]));
 document.getElementById("formulario").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  // Validación PDF antes de enviar
   const file = fileInput.files && fileInput.files[0];
   if(!file){
     setPdfError("❌ Adjunta el PDF para continuar.");
