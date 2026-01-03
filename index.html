@@ -56,12 +56,11 @@ body{
   align-items:center;
   min-width:0;
 }
-.brand img{
-  height: 80px;
-  width: 420px;          /* fuerza ancho del contenedor */
-  object-fit: cover;     /* RECORTA el espacio sobrante */
-  object-position: left center; /* prioriza izquierda */
-  display:block;
+.brand img{ 
+  height: 80px; /* 🔥 LOGO GRANDE */ 
+  width: auto;
+  max-width: 400px; /* evita que se rompa */ 
+  display: block; 
 }
 .pill{
   font-size:12px;
