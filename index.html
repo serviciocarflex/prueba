@@ -38,8 +38,6 @@ body{
   padding:18px 24px 28px;
 }
 
-/* ✅ QUITAMOS TOPBAR COMPLETO */
-
 /* Card principal */
 .main{
   margin-top:14px;
@@ -56,20 +54,24 @@ body{
   border-bottom:1px solid rgba(15,23,42,.07);
 }
 
-/* ✅ Logo dentro del header */
-.brand{
+/* ✅ CONTENEDOR LOGO + TEXTO (ESTE FALTABA) */
+.head-brand{
   display:flex;
   align-items:center;
+  width:100%;
 }
 
+/* Logo */
 .brand img{
-  height: 45px;        /* tamaño correcto */
-  width: auto;
-  max-width: 220px;
-  display: block;
+  height:45px;
+  width:auto;
+  max-width:220px;
+  display:block;
 }
-/* (Opcional) texto pequeño tipo “pill” bajo el logo */
+
+/* Texto a la derecha */
 .head-pill{
+  margin-left:auto;      /* ⬅️ ESTO LO EMPUJA A LA DERECHA */
   display:inline-block;
   font-size:12px;
   padding:6px 10px;
@@ -122,7 +124,7 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-/* ===== PDF (SIN DUPLICAR) ===== */
+/* ===== PDF ===== */
 .pdf-box{
   margin-top:14px;
   border-top:1px solid rgba(15,23,42,.08);
@@ -147,15 +149,11 @@ input:focus, select:focus, textarea:focus{
   font-size:13px;
   font-weight:700;
   cursor:pointer;
-  white-space:nowrap;
 }
-.pdf-btn:hover{ border-color: rgba(15,23,42,.28); }
 
 .pdf-filename{
   flex:1;
-  min-width:0;
   font-size:13px;
-  color:#0f172a;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -168,24 +166,13 @@ input:focus, select:focus, textarea:focus{
   font-weight:700;
   cursor:pointer;
   display:none;
-  white-space:nowrap;
 }
 
-.error{
-  display:none;
-  margin-top:8px;
-  font-size:12px;
-  color:#dc2626;
-  font-weight:600;
-}
-
-/* Actions */
 .actions{
   margin-top:16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
   gap:10px;
 }
 
@@ -197,33 +184,21 @@ button.primary{
   border:none;
   border-radius:14px;
   padding:12px 20px;
-  font-size:14px;
   font-weight:700;
   cursor:pointer;
   min-width:240px;
-}
-button.primary:hover{ background:var(--primary-700); }
-button.primary:disabled{ opacity:.7; cursor:not-allowed; }
-
-@media(max-width:860px){
-  .grid-2{ grid-template-columns:1fr; }
-  .actions{ flex-direction:column; align-items:stretch; }
-  button.primary{ width:100%; min-width:unset; }
-  .head-brand img{ height:64px; }
 }
 </style>
 </head>
 
 <body>
 <div class="shell">
-
   <div class="main">
     <div class="head">
 
-      <!-- ✅ LOGO ARRIBA DEL TÍTULO -->
+      <!-- LOGO IZQUIERDA + TEXTO DERECHA -->
       <div class="head-brand">
         <img src="Logo carflex.jpg" alt="Carflex">
-        <!-- Si no quieres nada extra, borra esta línea: -->
         <span class="head-pill">Carga de liquidación para emisión de OC</span>
       </div>
 
