@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,11 +11,14 @@
   --text:#0f172a;
   --muted:#64748b;
   --border:rgba(15,23,42,.12);
+
   --primary:#ff7225;
   --primary-700:#e5631f;
   --focus:rgba(255,114,37,.22);
+
   --radius:14px;
   --shadow:0 12px 35px rgba(2,6,23,.12);
+
   --h:44px;
   --pad:10px 12px;
 }
@@ -36,19 +38,19 @@ body{
   padding:18px 16px 24px;
 }
 
-/* HEADER */
 .topbar{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   padding:14px 16px;
   background:rgba(255,255,255,.96);
-  border-radius:var(--radius);
   border:1px solid rgba(15,23,42,.08);
+  border-radius:var(--radius);
   box-shadow:0 10px 25px rgba(2,6,23,.12);
 }
 
-.logo h1{ margin:0; font-size:26px; }
+.logo{ display:flex; flex-direction:column; }
+.logo h1{ margin:0; font-size:26px; letter-spacing:0; }
 .logo small{ font-size:12px; color:var(--muted); }
 
 .pill{
@@ -59,13 +61,13 @@ body{
   background:#fff;
 }
 
-/* MAIN */
 .main{
   margin-top:14px;
   background:rgba(255,255,255,.96);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   border:1px solid rgba(15,23,42,.08);
+  overflow:hidden;
 }
 
 .head{
@@ -98,6 +100,7 @@ input, select, textarea{
   border-radius:12px;
   font-size:14px;
   padding:var(--pad);
+  background:#fff;
 }
 input, select{ height:var(--h); }
 textarea{ min-height:90px; resize:vertical; }
@@ -114,50 +117,70 @@ input:focus, select:focus, textarea:focus{
   margin-top:6px;
 }
 
-/* PDF */
+/* ===== PDF (SIN DUPLICAR) ===== */
 .pdf-box{
   margin-top:14px;
   border-top:1px solid rgba(15,23,42,.08);
   padding-top:14px;
 }
 
-input[type="file"]::file-selector-button{
-  font-weight:700;
-  padding:8px 14px;
-  border-radius:10px;
+.pdf-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:8px;
+  background:#fff;
+}
+
+.pdf-btn{
   border:1px solid rgba(15,23,42,.14);
   background:#fff;
-  cursor:pointer;
-  margin-right:10px;
-}
-
-.file-info{
-  margin-top:8px;
-  display:none;
-  font-size:13px;
-  background:#fff;
-  border:1px solid rgba(15,23,42,.12);
   border-radius:10px;
-  padding:8px 10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.pdf-btn:hover{ border-color: rgba(15,23,42,.28); }
+
+.pdf-filename{
+  flex:1;
+  min-width:0;
+  font-size:13px;
+  color:#0f172a;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.file-info button{
+.pdf-remove{
   border:none;
-  background:none;
+  background:transparent;
   color:#dc2626;
   font-weight:700;
   cursor:pointer;
+  display:none; /* aparece solo si hay archivo */
+  white-space:nowrap;
 }
 
-/* ACTIONS */
+.error{
+  display:none;
+  margin-top:8px;
+  font-size:12px;
+  color:#dc2626;
+  font-weight:600;
+}
+
+/* Actions */
 .actions{
   margin-top:16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
   gap:10px;
 }
 
@@ -175,18 +198,18 @@ button.primary{
   min-width:240px;
 }
 button.primary:hover{ background:var(--primary-700); }
+button.primary:disabled{ opacity:.7; cursor:not-allowed; }
 
 @media(max-width:860px){
   .grid-2{ grid-template-columns:1fr; }
   .pill{ display:none; }
-  .actions{ flex-direction:column; }
-  button.primary{ width:100%; }
+  .actions{ flex-direction:column; align-items:stretch; }
+  button.primary{ width:100%; min-width:unset; }
 }
 </style>
 </head>
 
 <body>
-
 <div class="shell">
 
   <div class="topbar">
@@ -213,17 +236,20 @@ button.primary:hover{ background:var(--primary-700); }
         <div class="grid-2">
           <div>
             <label>Nombre del taller<span class="req">*</span></label>
-            <input name="nombre_taller" required>
+            <input name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required>
           </div>
+
           <div>
             <label>Correo electrónico del taller<span class="req">*</span></label>
-            <input type="email" name="correo_taller" required>
+            <input type="email" name="correo_taller" placeholder="Ej: contacto@taller.cl" required>
           </div>
+
           <div>
             <label>Patente<span class="req">*</span></label>
-            <input id="patente" name="patente" maxlength="6" required>
+            <input id="patente" name="patente" maxlength="6" required placeholder="AB123C">
             <div class="help">Se formatea automáticamente.</div>
           </div>
+
           <div>
             <label>Ciudad<span class="req">*</span></label>
             <select name="ciudad" required>
@@ -238,6 +264,7 @@ button.primary:hover{ background:var(--primary-700); }
               <option>Puerto Montt</option>
             </select>
           </div>
+
           <div>
             <label>Tipo de trabajo<span class="req">*</span></label>
             <select name="tipo_trabajo" required>
@@ -250,34 +277,42 @@ button.primary:hover{ background:var(--primary-700); }
               <option>Otros</option>
             </select>
           </div>
+
           <div>
             <label>Fecha de entrega<span class="req">*</span></label>
             <input type="date" name="fecha_entrega" required>
           </div>
+
           <div class="full">
             <label>N° de Liquidación<span class="req">*</span></label>
-            <input name="numero_liquidacion" required>
+            <input name="numero_liquidacion" placeholder="Número interno de liquidación" required>
           </div>
+
           <div class="full">
             <label>Descripción del trabajo<span class="req">*</span></label>
-            <textarea name="descripcion_trabajo" required></textarea>
+            <textarea name="descripcion_trabajo" placeholder="Ej: Mantención 10.000 km, cambio de aceite y filtros. Observaciones..." required></textarea>
           </div>
         </div>
 
-        <!-- PDF -->
+        <!-- PDF SIN DUPLICAR -->
         <div class="pdf-box">
           <label>Adjuntar liquidación (PDF)<span class="req">*</span></label>
-          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required>
-          <div class="file-info" id="fileInfo">
-            <span id="fileName"></span>
-            <button type="button" id="removeFile">Quitar</button>
+
+          <div class="pdf-row">
+            <button type="button" class="pdf-btn" id="pickPdf">Seleccionar PDF</button>
+            <div class="pdf-filename" id="pdfName">No se ha seleccionado ningún archivo</div>
+            <button type="button" class="pdf-remove" id="removePdf">Quitar</button>
           </div>
-          <div class="help">Formato permitido: PDF (máx. 10 MB).</div>
+
+          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required hidden>
+
+          <div class="error" id="pdfError"></div>
+          <div class="help">Formato permitido: PDF (máx. 10 MB). El archivo quedará registrado en el sistema.</div>
         </div>
 
         <div class="actions">
           <div class="note">Soporte Carflex: responde el correo de solicitud.</div>
-          <button type="submit" class="primary">Enviar liquidación</button>
+          <button type="submit" class="primary" id="btnEnviar">Enviar liquidación</button>
         </div>
 
       </form>
@@ -286,44 +321,89 @@ button.primary:hover{ background:var(--primary-700); }
 </div>
 
 <script>
+/* ==== CONFIG ==== */
 const WEBHOOK_URL = "https://TU-NGROK.ngrok-free.dev/webhook/liquidaciones";
+const MAX_MB = 10;
 
-const patente = document.getElementById("patente");
-patente.addEventListener("input", e=>{
+/* ==== PATENTE ==== */
+document.getElementById("patente").addEventListener("input", e=>{
   e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
 });
 
+/* ==== PDF UI + VALIDACIÓN ==== */
+const pickPdf = document.getElementById("pickPdf");
+const removePdf = document.getElementById("removePdf");
 const fileInput = document.getElementById("archivo_pdf");
-const fileInfo = document.getElementById("fileInfo");
-const fileName = document.getElementById("fileName");
-const removeBtn = document.getElementById("removeFile");
+const pdfName = document.getElementById("pdfName");
+const pdfError = document.getElementById("pdfError");
 
-fileInput.addEventListener("change", ()=>{
-  if(fileInput.files.length){
-    fileName.textContent = fileInput.files[0].name;
-    fileInfo.style.display = "flex";
-  }
-});
+function setPdfError(msg){
+  pdfError.textContent = msg;
+  pdfError.style.display = msg ? "block" : "none";
+}
 
-removeBtn.addEventListener("click", ()=>{
+function clearPdf(){
   fileInput.value = "";
-  fileInfo.style.display = "none";
-});
+  pdfName.textContent = "No se ha seleccionado ningún archivo";
+  removePdf.style.display = "none";
+  setPdfError("");
+}
 
-document.getElementById("formulario").addEventListener("submit", async e=>{
+function handleFile(file){
+  setPdfError("");
+
+  if(!file){
+    clearPdf();
+    return;
+  }
+
+  // Validar PDF
+  if(file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")){
+    clearPdf();
+    setPdfError("❌ Solo se permite archivo PDF.");
+    return;
+  }
+
+  // Validar tamaño
+  const sizeMB = file.size / (1024 * 1024);
+  if(sizeMB > MAX_MB){
+    clearPdf();
+    setPdfError(`❌ El archivo supera ${MAX_MB} MB.`);
+    return;
+  }
+
+  pdfName.textContent = file.name;
+  removePdf.style.display = "inline";
+}
+
+pickPdf.addEventListener("click", ()=> fileInput.click());
+removePdf.addEventListener("click", clearPdf);
+fileInput.addEventListener("change", ()=> handleFile(fileInput.files[0]));
+
+/* ==== SUBMIT (ENVÍO A N8N) ==== */
+document.getElementById("formulario").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  const formData = new FormData(e.target);
-  const btn = e.target.querySelector("button[type='submit']");
+  // Validación PDF antes de enviar
+  const file = fileInput.files && fileInput.files[0];
+  if(!file){
+    setPdfError("❌ Adjunta el PDF para continuar.");
+    return;
+  }
+
+  const btn = document.getElementById("btnEnviar");
   btn.disabled = true;
   btn.textContent = "Enviando...";
 
+  const formData = new FormData(e.target);
+
   try{
-    const res = await fetch(WEBHOOK_URL,{ method:"POST", body:formData });
-    if(!res.ok) throw new Error();
+    const res = await fetch(WEBHOOK_URL, { method:"POST", body: formData });
+    if(!res.ok) throw new Error("HTTP error");
+
     alert("✅ Liquidación enviada correctamente");
     location.reload();
-  }catch{
+  }catch(err){
     alert("❌ Error al enviar la liquidación");
     btn.disabled = false;
     btn.textContent = "Enviar liquidación";
