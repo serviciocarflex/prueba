@@ -190,6 +190,22 @@ button.primary{
   min-width:240px;
 }
 
+/* ✅ MENSAJE DE ÉXITO */
+.exito{
+  display:none;
+  text-align:center;
+  padding:50px 18px;
+}
+.exito h2{
+  margin:0 0 10px;
+  font-size:20px;
+}
+.exito p{
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+
 /* ✅✅ AQUI VA LA PARTE PARA CELULAR (AGREGADA) ✅✅ */
 @media (max-width: 860px){
   .grid-2{
@@ -322,6 +338,14 @@ button.primary{
         </div>
 
       </form>
+
+      <!-- ✅✅ PANTALLA ÉXITO (SIN ALERT) ✅✅ -->
+      <div id="mensaje" class="exito">
+        <h2>✅ Su liquidación ha sido enviada con éxito</h2>
+        <p>Se le llegará esta confirmación por correo.</p>
+        <button type="button" class="primary" id="btnOtra">Añadir otra liquidación</button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -404,13 +428,20 @@ document.getElementById("formulario").addEventListener("submit", async (e)=>{
     const res = await fetch(WEBHOOK_URL, { method:"POST", body: formData });
     if(!res.ok) throw new Error("HTTP error");
 
-    alert("✅ Liquidación enviada correctamente");
-    location.reload();
+    // ✅ SIN ALERT: ocultar form y mostrar mensaje éxito
+    e.target.style.display = "none";
+    document.getElementById("mensaje").style.display = "block";
+
   }catch(err){
     alert("❌ Error al enviar la liquidación");
     btn.disabled = false;
     btn.textContent = "Enviar liquidación";
   }
+});
+
+/* ✅ Botón "Añadir otra liquidación" */
+document.getElementById("btnOtra").addEventListener("click", ()=>{
+  window.location.reload();
 });
 </script>
 
