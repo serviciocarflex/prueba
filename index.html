@@ -38,38 +38,9 @@ body{
   padding:18px 24px 28px;
 }
 
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 14px;
-  padding:14px 16px;
-  background:rgba(255,255,255,.96);
-  border:1px solid rgba(15,23,42,.08);
-  border-radius:var(--radius);
-  box-shadow:0 10px 25px rgba(2,6,23,.12);
-}
+/* ✅ QUITAMOS TOPBAR COMPLETO */
 
-/* ✅ Logo como imagen (sin texto extra) */
-.brand{
-  display:flex;
-  align-items:center;
-  min-width:0;
-}
-.brand img{
-  height: 64px;
-  width: auto;
-  display: block;
-}
-.pill{
-  font-size:12px;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px solid rgba(15,23,42,.12);
-  background:#fff;
-  white-space: nowrap;
-}
-
+/* Card principal */
 .main{
   margin-top:14px;
   background:rgba(255,255,255,.96);
@@ -79,10 +50,36 @@ body{
   overflow:hidden;
 }
 
+/* Header del formulario */
 .head{
   padding:16px 18px;
   border-bottom:1px solid rgba(15,23,42,.07);
 }
+
+/* ✅ Logo dentro del header */
+.head-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.head-brand img{
+  height:72px;   /* 🔥 ajusta aquí el tamaño del logo */
+  width:auto;
+  display:block;
+}
+
+/* (Opcional) texto pequeño tipo “pill” bajo el logo */
+.head-pill{
+  display:inline-block;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.12);
+  background:#fff;
+  color:#0f172a;
+}
+
 .head h2{ margin:0 0 4px; font-size:20px; }
 .head p{ margin:0; font-size:13px; color:var(--muted); }
 
@@ -211,9 +208,9 @@ button.primary:disabled{ opacity:.7; cursor:not-allowed; }
 
 @media(max-width:860px){
   .grid-2{ grid-template-columns:1fr; }
-  .pill{ display:none; }
   .actions{ flex-direction:column; align-items:stretch; }
   button.primary{ width:100%; min-width:unset; }
+  .head-brand img{ height:64px; }
 }
 </style>
 </head>
@@ -221,17 +218,16 @@ button.primary:disabled{ opacity:.7; cursor:not-allowed; }
 <body>
 <div class="shell">
 
-  <div class="topbar">
-    <!-- ✅ LOGO COMO IMAGEN -->
-    <div class="brand">
-      <img src="Logo carflex.jpg" alt="Carflex">
-    </div>
-
-    <div class="pill">Carga de liquidación para emisión de OC</div>
-  </div>
-
   <div class="main">
     <div class="head">
+
+      <!-- ✅ LOGO ARRIBA DEL TÍTULO -->
+      <div class="head-brand">
+        <img src="Logo carflex.jpg" alt="Carflex">
+        <!-- Si no quieres nada extra, borra esta línea: -->
+        <span class="head-pill">Carga de liquidación para emisión de OC</span>
+      </div>
+
       <h2>Portal de Liquidaciones</h2>
       <p>Registra la liquidación asociada a la unidad. Todos los campos son obligatorios.</p>
     </div>
@@ -416,4 +412,3 @@ document.getElementById("formulario").addEventListener("submit", async (e)=>{
 
 </body>
 </html>
-
