@@ -6,194 +6,163 @@
 <title>Portal de Liquidaciones | Carflex</title>
 
 <style>
-/* =========================
-   BASE / TOKENS
-========================= */
 :root{
-  --bg: #0b1220;
-  --card: rgba(255,255,255,.96);
+  --bg: #f6f7fb;
+  --card: #ffffff;
   --text: #0f172a;
-  --muted: #64748b;
-  --border: rgba(15, 23, 42, .12);
+  --muted:#64748b;
+  --border: rgba(15,23,42,.12);
 
-  --primary: #ff7225;
+  --primary:#ff7225;
   --primary-700:#e5631f;
   --focus: rgba(255,114,37,.22);
 
-  --radius: 16px;
-  --shadow: 0 18px 50px rgba(2,6,23,.18);
+  --radius: 14px;
+  --shadow: 0 12px 35px rgba(2,6,23,.08);
 
-  --field-bg: #fff;
-  --field-h: 46px;
+  --h: 44px;           /* altura input */
+  --pad: 10px 12px;    /* padding input */
 }
 
-*{ box-sizing: border-box; }
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);   /* SIN IMAGEN */
   color: var(--text);
-
-  /* Fondo con imagen + overlay pro */
-  background:
-    linear-gradient(180deg, rgba(2,6,23,.55), rgba(2,6,23,.55)),
-    url("fondo formulario.jpg") center / cover no-repeat fixed;
 }
 
-/* Layout centrado */
-.page{
-  min-height: 100vh;
-  padding: 34px 16px;
+/* ====== LAYOUT FULL WIDTH ====== */
+.shell{
+  max-width: 1240px;     /* usa pantalla de forma pro */
+  margin: 0 auto;
+  padding: 18px 16px 24px;
+}
+
+/* ====== HEADER TOP BAR ====== */
+.topbar{
   display:flex;
-  align-items:flex-start;
-  justify-content:center;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(15,23,42,.08);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(2,6,23,.05);
 }
 
-/* Card */
-.card{
-  width: 100%;
-  max-width: 900px;
+/* ✅ LOGO: lo dejo EXACTO como lo enviaste (no lo rompo) */
+.logo{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+}
+.logo h1{
+  margin:0;
+  font-size: 26px;
+  letter-spacing: 3px;
+}
+.logo small{
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Etiqueta a la derecha (opcional) */
+.pill{
+  font-size: 12px;
+  color:#334155;
+  padding: 8px 10px;
+  border: 1px solid rgba(15,23,42,.12);
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* ====== MAIN AREA ====== */
+.main{
+  margin-top: 14px;
   background: var(--card);
-  border: 1px solid rgba(255,255,255,.55);
+  border: 1px solid rgba(15,23,42,.08);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow:hidden;
 }
 
-/* Header */
-.header{
-  padding: 22px 26px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 14px;
-  border-bottom: 1px solid rgba(15, 23, 42, .07);
-  backdrop-filter: blur(6px);
+.head{
+  padding: 16px 18px 10px;
+  border-bottom: 1px solid rgba(15,23,42,.07);
 }
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-}
-
-.brand-mark{
-  line-height:1;
-  font-weight:900;
-  letter-spacing: 6px;
+.head h2{
+  margin:0 0 4px;
   font-size: 20px;
-}
-
-.brand small{
-  display:block;
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 2px;
-}
-
-.badge{
-  font-size: 12px;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(15,23,42,.12);
-  background: rgba(255,255,255,.65);
-  color: #334155;
-}
-
-/* Content */
-.content{
-  padding: 26px;
-}
-
-.title{
-  margin: 0 0 6px;
-  font-size: 22px;
   letter-spacing: -0.2px;
 }
-
-.subtitle{
-  margin: 0 0 18px;
+.head p{
+  margin:0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-/* Secciones “limpias” */
-.section{
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(15,23,42,.08);
-  border-radius: 14px;
-  padding: 16px;
-  margin-top: 14px;
-}
-
-.section-title{
-  margin: 0 0 12px;
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: .2px;
-  color: #334155;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  line-height: 1.35;
 }
 
-.section-title span{
-  color: var(--muted);
-  font-weight: 600;
+/* ====== FORM ====== */
+.form{
+  padding: 14px 18px 18px;
+}
+
+/* Diseño limpio sin “cuadrantes”:
+   - título sección pequeño
+   - separadores suaves
+*/
+.section-title{
+  margin: 12px 0 10px;
   font-size: 12px;
+  color:#334155;
+  font-weight: 900;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+}
+.hr{
+  height:1px;
+  background: rgba(15,23,42,.08);
+  margin: 12px 0;
 }
 
-/* Grid */
-.grid{
+/* Grid compacto para que haya menos scroll */
+.grid-2{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px 16px;
+  gap: 10px 14px;
 }
-
-.full{
-  grid-column: 1 / -1;
-}
+.full{ grid-column: 1 / -1; }
 
 /* Field */
-.field label{
+label{
   display:block;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12.5px;
+  font-weight: 800;
   margin-bottom: 6px;
+  color:#0f172a;
 }
+.req{ color: var(--primary); margin-left:4px; font-weight: 900; }
 
-.req{
-  color: var(--primary);
-  margin-left: 4px;
-  font-weight: 900;
-}
-
-.help{
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Inputs */
 input, select, textarea{
-  width: 100%;
+  width:100%;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--field-bg);
+  background: #fff;
   font-size: 14px;
-  padding: 12px 12px;
   outline: none;
 }
-
 input, select{
-  height: var(--field-h);
+  height: var(--h);
+  padding: var(--pad);
 }
-
 textarea{
-  min-height: 110px;
+  padding: var(--pad);
+  min-height: 88px;  /* MÁS BAJO para que no “alargue” la página */
   resize: vertical;
-  line-height: 1.35;
 }
 
 input:focus, select:focus, textarea:focus{
@@ -201,7 +170,12 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 0 0 4px var(--focus);
 }
 
-/* Error debajo del campo */
+/* Helpers */
+.help{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
 .error-text{
   display:none;
   margin-top: 6px;
@@ -209,57 +183,60 @@ input:focus, select:focus, textarea:focus{
   color: #dc2626;
 }
 
-/* Dropzone */
+/* ====== DROPZONE COMPACTO ====== */
 .dropzone{
   border: 1.5px dashed rgba(15,23,42,.18);
   border-radius: 14px;
-  padding: 14px;
-  background: rgba(255,255,255,.8);
+  padding: 12px;
+  background: #fff;
   transition: .15s ease;
 }
 .dropzone.dragover{
   border-color: var(--primary);
   box-shadow: 0 0 0 4px var(--focus);
-  background: #fff;
 }
 .dz-row{
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   justify-content:space-between;
   gap: 10px;
 }
+.dz-text{
+  min-width: 0;
+}
 .dz-title{
-  font-weight: 800;
+  margin:0;
   font-size: 13px;
-  margin: 0 0 3px;
+  font-weight: 900;
 }
 .dz-sub{
-  margin:0;
+  margin: 3px 0 0;
   font-size: 12px;
   color: var(--muted);
-  line-height: 1.35;
+  line-height: 1.3;
 }
 .dz-actions{
   display:flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
-.link-btn{
+.btn-lite{
   border: 1px solid rgba(15,23,42,.14);
-  background: rgba(255,255,255,.9);
+  background: #fff;
   color: #0f172a;
-  border-radius: 10px;
-  padding: 9px 10px;
+  border-radius: 12px;
+  padding: 10px 12px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 900;
   cursor:pointer;
 }
-.link-btn:hover{ border-color: rgba(15,23,42,.25); }
+.btn-lite:hover{ border-color: rgba(15,23,42,.25); }
+
 .file-pill{
   display:none;
   margin-top: 10px;
   border: 1px solid rgba(15,23,42,.12);
-  background: rgba(255,255,255,.9);
+  background: #fff;
   border-radius: 12px;
   padding: 10px 12px;
   font-size: 13px;
@@ -278,33 +255,34 @@ input:focus, select:focus, textarea:focus{
   cursor:pointer;
 }
 
-/* Footer actions */
+/* ====== FOOT ACTIONS ====== */
 .actions{
-  margin-top: 16px;
+  margin-top: 14px;
   display:flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap: wrap;
 }
 
 button.primary{
-  width:100%;
   border:none;
   border-radius: 14px;
-  padding: 14px 16px;
+  padding: 12px 16px;
   font-size: 14px;
   font-weight: 900;
   cursor:pointer;
   background: var(--primary);
   color: #fff;
-  transition: .12s ease;
+  min-width: 240px;
 }
 button.primary:hover{ background: var(--primary-700); }
 button.primary:disabled{ opacity:.65; cursor:not-allowed; }
 
 .note{
+  margin-right:auto;
   font-size: 12px;
   color: var(--muted);
-  text-align:center;
 }
 
 /* Success */
@@ -324,7 +302,7 @@ button.primary:disabled{ opacity:.65; cursor:not-allowed; }
 }
 button.secondary{
   border: 1px solid rgba(15,23,42,.14);
-  background: rgba(255,255,255,.9);
+  background: #fff;
   color: #0f172a;
   border-radius: 14px;
   padding: 12px 14px;
@@ -333,194 +311,169 @@ button.secondary{
 }
 
 /* Responsive */
-@media (max-width: 760px){
-  .header{ padding: 18px 16px; }
-  .content{ padding: 16px; }
-  .grid{ grid-template-columns: 1fr; }
-  .badge{ display:none; }
-  .brand-mark{ letter-spacing: 4px; }
+@media (max-width: 860px){
+  .grid-2{ grid-template-columns: 1fr; }
+  .pill{ display:none; }
+  button.primary{ width:100%; min-width: unset; }
+  .actions{ justify-content:stretch; }
+  .note{ width:100%; margin-right:0; text-align:center; }
 }
 </style>
 </head>
 
 <body>
-  <div class="page">
-    <div class="card">
 
-      <div class="header">
-        <div class="brand">
-          <div>
-            <div class="brand-mark" aria-label="CARFLEX">
-              <span style="color:#033201;">C</span>
-              <span style="color:#033201;">A</span>
-              <span style="color:#033201;">R</span>
-              <span style="color:#820889;">F</span>
-              <span style="color:#0dc5aa;">L</span>
-              <span style="color:#ff7225;">E</span>
-              <span style="color:#ffae17;">X</span>
-            </div>
-            <small>Soluciones en movimiento</small>
-          </div>
-        </div>
+<div class="shell">
 
-        <div class="badge">Carga de liquidación para emisión de OC</div>
-      </div>
-
-      <div class="content">
-
-        <form id="formulario" enctype="multipart/form-data">
-          <h1 class="title">Portal de Liquidaciones</h1>
-          <p class="subtitle">
-            Registra la liquidación asociada a la unidad. Todos los campos son obligatorios.
-          </p>
-
-          <!-- Sección: Taller -->
-          <div class="section">
-            <div class="section-title">
-              <strong>Datos del taller</strong>
-              <span>* Obligatorio</span>
-            </div>
-
-            <div class="grid">
-              <div class="field">
-                <label for="nombre_taller">Nombre del taller<span class="req">*</span></label>
-                <input id="nombre_taller" type="text" name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required />
-                <div class="error-text" data-error-for="nombre_taller"></div>
-              </div>
-
-              <div class="field">
-                <label for="correo_taller">Correo electrónico del taller<span class="req">*</span></label>
-                <input id="correo_taller" type="email" name="correo_taller" placeholder="Ej: contacto@taller.cl" required />
-                <div class="error-text" data-error-for="correo_taller"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sección: Unidad -->
-          <div class="section">
-            <div class="section-title">
-              <strong>Unidad y trabajo</strong>
-              <span>Evita errores de patente</span>
-            </div>
-
-            <div class="grid">
-              <div class="field">
-                <label for="patente">Patente (sin espacios ni guión)<span class="req">*</span></label>
-                <input
-                  id="patente"
-                  type="text"
-                  name="patente"
-                  required
-                  maxlength="6"
-                  pattern="[A-Za-z0-9]{6}"
-                  placeholder="AB123C"
-                  autocomplete="off"
-                />
-                <div class="help">Se formatea automáticamente (mayúsculas, sin guiones).</div>
-                <div class="error-text" data-error-for="patente"></div>
-              </div>
-
-              <div class="field">
-                <label for="ciudad">Ciudad<span class="req">*</span></label>
-                <select id="ciudad" name="ciudad" required>
-                  <option value="">Seleccione</option>
-                  <option>Santiago</option>
-                  <option>Valparaíso</option>
-                  <option>Viña del Mar</option>
-                  <option>Rancagua</option>
-                  <option>Talca</option>
-                  <option>Concepción</option>
-                  <option>Temuco</option>
-                  <option>Puerto Montt</option>
-                </select>
-                <div class="error-text" data-error-for="ciudad"></div>
-              </div>
-
-              <div class="field">
-                <label for="tipo_trabajo">Tipo de trabajo<span class="req">*</span></label>
-                <select id="tipo_trabajo" name="tipo_trabajo" required>
-                  <option value="">Seleccione</option>
-                  <option>Mantención</option>
-                  <option>Reparación Mecánica</option>
-                  <option>Revisión Técnica</option>
-                  <option>Neumático</option>
-                  <option>Siniestro y DYP</option>
-                  <option>Otros</option>
-                </select>
-                <div class="error-text" data-error-for="tipo_trabajo"></div>
-              </div>
-
-              <div class="field">
-                <label for="fecha_entrega">Fecha de entrega de la unidad<span class="req">*</span></label>
-                <input id="fecha_entrega" type="date" name="fecha_entrega" required />
-                <div class="error-text" data-error-for="fecha_entrega"></div>
-              </div>
-
-              <div class="field full">
-                <label for="numero_liquidacion">N° de Liquidación<span class="req">*</span></label>
-                <input id="numero_liquidacion" type="text" name="numero_liquidacion" placeholder="Número interno de liquidación" required />
-                <div class="error-text" data-error-for="numero_liquidacion"></div>
-              </div>
-
-              <div class="field full">
-                <label for="descripcion_trabajo">Descripción del trabajo<span class="req">*</span></label>
-                <textarea id="descripcion_trabajo" name="descripcion_trabajo" rows="4" placeholder="Ej: Mantención 10.000 km, cambio de aceite y filtros. Observaciones..." required></textarea>
-                <div class="error-text" data-error-for="descripcion_trabajo"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sección: PDF -->
-          <div class="section">
-            <div class="section-title">
-              <strong>Adjuntar liquidación</strong>
-              <span>PDF (máx. 10 MB)</span>
-            </div>
-
-            <div class="dropzone" id="dropzone" role="group" aria-label="Adjuntar PDF">
-              <div class="dz-row">
-                <div>
-                  <p class="dz-title">Adjuntar liquidación (PDF)<span class="req">*</span></p>
-                  <p class="dz-sub">Arrastra y suelta el archivo aquí o usa “Buscar archivo”.</p>
-                </div>
-
-                <div class="dz-actions">
-                  <button type="button" class="link-btn" id="pick">Buscar archivo</button>
-                </div>
-              </div>
-
-              <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required hidden />
-
-              <div class="file-pill" id="filePill">
-                <span id="fileInfo"></span>
-                <button type="button" class="file-remove" id="removeFile" aria-label="Quitar archivo">Quitar</button>
-              </div>
-
-              <div class="help">El archivo quedará registrado en el sistema.</div>
-              <div class="error-text" data-error-for="archivo_pdf"></div>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button type="submit" class="primary" id="btnEnviar">Enviar liquidación</button>
-            <div class="note">Si tienes problemas, contacta a soporte Carflex.</div>
-          </div>
-        </form>
-
-        <div id="mensaje" class="success">
-          <h2>✅ Liquidación registrada correctamente</h2>
-          <p>El comprobante fue enviado al correo del taller y la información quedó almacenada en el sistema.</p>
-          <button class="secondary" onclick="window.location.reload()">Enviar otra liquidación</button>
-        </div>
-
-      </div>
+  <div class="topbar">
+    <!-- ✅ LOGO EXACTO -->
+    <div class="logo">
+      <h1>
+        <span style="color:#033201;">C</span>
+        <span style="color:#033201;">A</span>
+        <span style="color:#033201;">R</span>
+        <span style="color:#820889;">F</span>
+        <span style="color:#0dc5aa;">L</span>
+        <span style="color:#ff7225;">E</span>
+        <span style="color:#ffae17;">X</span>
+      </h1>
+      <small>Soluciones en movimiento</small>
     </div>
+
+    <div class="pill">Carga de liquidación para emisión de OC</div>
   </div>
 
+  <div class="main">
+
+    <div class="head">
+      <h2>Portal de Liquidaciones</h2>
+      <p>Registra la liquidación asociada a la unidad. Todos los campos son obligatorios.</p>
+    </div>
+
+    <div class="form">
+      <form id="formulario" enctype="multipart/form-data">
+
+        <div class="section-title">Datos del taller</div>
+
+        <div class="grid-2">
+          <div>
+            <label for="nombre_taller">Nombre del taller<span class="req">*</span></label>
+            <input id="nombre_taller" type="text" name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required />
+            <div class="error-text" data-error-for="nombre_taller"></div>
+          </div>
+
+          <div>
+            <label for="correo_taller">Correo electrónico del taller<span class="req">*</span></label>
+            <input id="correo_taller" type="email" name="correo_taller" placeholder="Ej: contacto@taller.cl" required />
+            <div class="error-text" data-error-for="correo_taller"></div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="section-title">Unidad y trabajo</div>
+
+        <div class="grid-2">
+          <div>
+            <label for="patente">Patente (sin espacios ni guión)<span class="req">*</span></label>
+            <input id="patente" type="text" name="patente" required maxlength="6" pattern="[A-Za-z0-9]{6}" placeholder="AB123C" autocomplete="off" />
+            <div class="help">Se formatea automáticamente (mayúsculas, sin guiones).</div>
+            <div class="error-text" data-error-for="patente"></div>
+          </div>
+
+          <div>
+            <label for="ciudad">Ciudad<span class="req">*</span></label>
+            <select id="ciudad" name="ciudad" required>
+              <option value="">Seleccione</option>
+              <option>Santiago</option>
+              <option>Valparaíso</option>
+              <option>Viña del Mar</option>
+              <option>Rancagua</option>
+              <option>Talca</option>
+              <option>Concepción</option>
+              <option>Temuco</option>
+              <option>Puerto Montt</option>
+            </select>
+            <div class="error-text" data-error-for="ciudad"></div>
+          </div>
+
+          <div>
+            <label for="tipo_trabajo">Tipo de trabajo<span class="req">*</span></label>
+            <select id="tipo_trabajo" name="tipo_trabajo" required>
+              <option value="">Seleccione</option>
+              <option>Mantención</option>
+              <option>Reparación Mecánica</option>
+              <option>Revisión Técnica</option>
+              <option>Neumático</option>
+              <option>Siniestro y DYP</option>
+              <option>Otros</option>
+            </select>
+            <div class="error-text" data-error-for="tipo_trabajo"></div>
+          </div>
+
+          <div>
+            <label for="fecha_entrega">Fecha de entrega de la unidad<span class="req">*</span></label>
+            <input id="fecha_entrega" type="date" name="fecha_entrega" required />
+            <div class="error-text" data-error-for="fecha_entrega"></div>
+          </div>
+
+          <div class="full">
+            <label for="numero_liquidacion">N° de Liquidación<span class="req">*</span></label>
+            <input id="numero_liquidacion" type="text" name="numero_liquidacion" placeholder="Número interno de liquidación" required />
+            <div class="error-text" data-error-for="numero_liquidacion"></div>
+          </div>
+
+          <div class="full">
+            <label for="descripcion_trabajo">Descripción del trabajo<span class="req">*</span></label>
+            <textarea id="descripcion_trabajo" name="descripcion_trabajo" rows="3" placeholder="Ej: Mantención 10.000 km, cambio de aceite y filtros. Observaciones..." required></textarea>
+            <div class="error-text" data-error-for="descripcion_trabajo"></div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="section-title">Adjuntar liquidación</div>
+
+        <div class="dropzone" id="dropzone" role="group" aria-label="Adjuntar PDF">
+          <div class="dz-row">
+            <div class="dz-text">
+              <p class="dz-title">Adjuntar liquidación (PDF)<span class="req">*</span></p>
+              <p class="dz-sub">Arrastra y suelta el archivo aquí o usa “Buscar archivo”. (Máx. 10 MB)</p>
+              <div class="error-text" data-error-for="archivo_pdf"></div>
+            </div>
+            <div class="dz-actions">
+              <button type="button" class="btn-lite" id="pick">Buscar archivo</button>
+            </div>
+          </div>
+
+          <input type="file" id="archivo_pdf" name="archivo_pdf" accept="application/pdf" required hidden />
+
+          <div class="file-pill" id="filePill">
+            <span id="fileInfo"></span>
+            <button type="button" class="file-remove" id="removeFile">Quitar</button>
+          </div>
+
+          <div class="help">El archivo quedará registrado en el sistema.</div>
+        </div>
+
+        <div class="actions">
+          <div class="note">Soporte Carflex: si tienes problemas, responde el correo de solicitud.</div>
+          <button type="submit" class="primary" id="btnEnviar">Enviar liquidación</button>
+        </div>
+
+      </form>
+
+      <div id="mensaje" class="success">
+        <h2>✅ Liquidación registrada correctamente</h2>
+        <p>El comprobante fue enviado al correo del taller y la información quedó almacenada en el sistema.</p>
+        <button class="secondary" onclick="window.location.reload()">Enviar otra liquidación</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
-/* =========================
-   Helpers UI
-========================= */
 function showError(fieldName, message){
   const el = document.querySelector(`[data-error-for="${fieldName}"]`);
   if(!el) return;
@@ -537,25 +490,20 @@ function clearAllErrors(){
   document.querySelectorAll(".error-text").forEach(e => { e.style.display="none"; e.textContent=""; });
 }
 
-/* =========================
-   Patente formatting
-========================= */
+/* Patente formatting */
 const patente = document.getElementById("patente");
 patente.addEventListener("input", () => {
   patente.value = patente.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
   if (patente.value.length > 6) patente.value = patente.value.slice(0,6);
 });
 
-/* =========================
-   Dropzone PDF
-========================= */
+/* Dropzone PDF */
 const dz = document.getElementById("dropzone");
 const fileInput = document.getElementById("archivo_pdf");
 const pick = document.getElementById("pick");
 const filePill = document.getElementById("filePill");
 const fileInfo = document.getElementById("fileInfo");
 const removeFile = document.getElementById("removeFile");
-
 const MAX_MB = 10;
 
 pick.addEventListener("click", () => fileInput.click());
@@ -603,7 +551,6 @@ dz.addEventListener("drop", e => {
   const f = e.dataTransfer.files[0];
   if(!f) return;
 
-  // Cargar en el input real para que FormData lo incluya
   const dt = new DataTransfer();
   dt.items.add(f);
   fileInput.files = dt.files;
@@ -611,9 +558,7 @@ dz.addEventListener("drop", e => {
   setFile(f);
 });
 
-/* =========================
-   Submit
-========================= */
+/* Submit */
 document.getElementById("formulario").addEventListener("submit", async function(e){
   e.preventDefault();
   clearAllErrors();
@@ -622,15 +567,13 @@ document.getElementById("formulario").addEventListener("submit", async function(
   const boton = document.getElementById("btnEnviar");
   const mensaje = document.getElementById("mensaje");
 
-  // Validación rápida (además del required nativo)
-  const requiredFields = [
+  const requiredIds = [
     "nombre_taller","correo_taller","patente","ciudad",
-    "tipo_trabajo","fecha_entrega","numero_liquidacion",
-    "descripcion_trabajo"
+    "tipo_trabajo","fecha_entrega","numero_liquidacion","descripcion_trabajo"
   ];
 
   let ok = true;
-  requiredFields.forEach(id => {
+  requiredIds.forEach(id => {
     const el = document.getElementById(id);
     if(!el.value){
       ok = false;
@@ -638,13 +581,11 @@ document.getElementById("formulario").addEventListener("submit", async function(
     }
   });
 
-  // Patente exacta 6
   if(patente.value && patente.value.length !== 6){
     ok = false;
     showError("patente", "La patente debe tener 6 caracteres (ej: AB123C).");
   }
 
-  // PDF obligatorio
   if(!fileInput.files || !fileInput.files[0]){
     ok = false;
     showError("archivo_pdf", "Adjunta el PDF para continuar.");
@@ -657,12 +598,10 @@ document.getElementById("formulario").addEventListener("submit", async function(
   boton.disabled = true;
   boton.textContent = "Enviando...";
 
-  // OJO: si tu ngrok cambia, tendrás que actualizar este link.
   const webhook = "https://uncollapsible-melodiously-chung.ngrok-free.dev/webhook/liquidaciones";
 
   try{
     const res = await fetch(webhook, { method:"POST", body:data });
-
     if(res.ok){
       form.style.display = "none";
       mensaje.style.display = "block";
@@ -671,7 +610,7 @@ document.getElementById("formulario").addEventListener("submit", async function(
       boton.disabled = false;
       boton.textContent = "Enviar liquidación";
     }
-  }catch(err){
+  }catch{
     alert("❌ Error de conexión");
     boton.disabled = false;
     boton.textContent = "Enviar liquidación";
@@ -681,4 +620,3 @@ document.getElementById("formulario").addEventListener("submit", async function(
 
 </body>
 </html>
-
